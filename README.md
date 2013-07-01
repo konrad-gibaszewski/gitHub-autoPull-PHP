@@ -93,11 +93,9 @@ server {
     allow xxx.xxx.xxx.xxx;
     
     # Allow GitHub post-receive hook to call git-pull.php script
-    # The IPs list varies from repo to repo and should be always updated
-    # when creating new repository
-    allow 50.57.128.197/32;
-    allow 50.57.231.61/32;
-    allow 108.171.174.178/32;
+    # The list of hookshot IPs can vary and can be checked under https://api.github.com/meta
+    allow 204.232.175.64/27;
+    allow 192.30.252.0/22;
   }
 
   ...
@@ -162,12 +160,10 @@ File __/var/www/projectName/repoData/.htaccess__
   # Allow from xxx.xxx.xxx.xxx
   
   # Allow GitHub post-receive hook to call git-pull.php script
-  # The IPs list varies from repo to repo and should be always updated
-  # when creating new repository
-  Allow from 50.57.128.197/32
-  Allow from 50.57.231.61/32
-  Allow from 108.171.174.178/32
-  
+  # The list of hookshot IPs can vary and can be checked under https://api.github.com/meta
+  Allow from 204.232.175.64/27
+  Allow from 192.30.252.0/22
+
   Satisfy Any
 </Files>
 ```
