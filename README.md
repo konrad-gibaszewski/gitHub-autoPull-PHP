@@ -11,7 +11,7 @@ ae2da0d420e790c7394fd4d7a8fb3726edf7135c - 2012-10-05T03:17:59-07:00 - Readme up
 
 ```bash
 cd /var/www/projectName
-git submodule add git@github.com:syncube/gitHub-autoPull-PHP.git repoData
+git submodule add https://github.com/syncube/gitHub-autoPull-PHP.git repoData
 git commit -m 'Added gitHub-autoPull-PHP as a submodule'
 cd repoData
 git fetch -a
