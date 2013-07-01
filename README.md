@@ -4,7 +4,7 @@ __GitHub automatic pull script__ keeps your project's remote installation up-to-
 
 File __/var/www/projectName/repoData/git-auto-pulls.log__
 ```log
-    ae2da0d420e790c7394fd4d7a8fb3726edf7135c - 2012-10-05T03:17:59-07:00 - Readme update - Konrad Gibaszewski
+ae2da0d420e790c7394fd4d7a8fb3726edf7135c - 2012-10-05T03:17:59-07:00 - Readme update - Konrad Gibaszewski
 ```
 
 ## Install
@@ -29,8 +29,8 @@ For server side GitHub authentication it's convenient to use SSH public key auth
 Save your newly generated key pair as ```id_rsa_github-projectName``` and ```id_rsa_github-projectName.pub```.
 
 ```bash
-    cd /var/www/.ssh/
-    ssh-keygen -t rsa
+cd /var/www/.ssh/
+ssh-keygen -t rsa
 ```
 
 __Important!__ Do not forget to deploy public key by going to *[GitHub](https://github.com/) -> Project's Repository -> Admin -> Deploy keys -> Add deploy key*.
@@ -38,24 +38,24 @@ __Important!__ Do not forget to deploy public key by going to *[GitHub](https://
 SSH configuration for user www-data. File __/var/www/.ssh/config__
 
 ```bash
-  # General authentication with GitHub
-  Host github.com
-    User git
-    HostName github.com
-    PreferredAuthentications publickey
-    IdentityFile ~/.ssh/id_rsa_github
+# General authentication with GitHub
+Host github.com
+  User git
+  HostName github.com
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/id_rsa_github
       
-  Host projectName
-    User git
-    HostName github.com
-    PreferredAuthentications publickey
-    IdentityFile ~/.ssh/id_rsa_github-projectName
+Host projectName
+  User git
+  HostName github.com
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/id_rsa_github-projectName
 
-  Host projectName2
-    User git
-    HostName github.com
-    PreferredAuthentications publickey
-    IdentityFile ~/.ssh/id_rsa_github-projectName2
+Host projectName2
+  User git
+  HostName github.com
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/id_rsa_github-projectName2
 ```
 
 ## .htpasswd 
@@ -114,21 +114,21 @@ File __/etc/apache2/sites-available/projectName__
 ```bash
 <VirtualHost *>
 
-    ...
-    
-    ServerName projectName.TLD
-    DocumentRoot /var/www/projectName.TLD/
+  ...
 
-    ...
+  ServerName projectName.TLD
+  DocumentRoot /var/www/projectName.TLD/
 
-    <Directory /var/www/projectName/>
-        Options -Indexes FollowSymLinks MultiViews
-        AllowOverride All
-        Order Allow,Deny
-        Allow from all
-    </Directory>
+  ...
 
-    ...
+  <Directory /var/www/projectName/>
+    Options -Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    Order Allow,Deny
+    Allow from all
+  </Directory>
+
+  ...
 
 </VirtualHost>
 ```
