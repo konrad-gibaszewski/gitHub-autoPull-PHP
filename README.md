@@ -1,4 +1,4 @@
-# GitHub web hook auto pull service for PHP
+# GitHub web hook auto pull for PHP
 
 __GitHub automatic pull script__ keeps your project's remote installation up-to-date by automatically pulling all changes pushed to that project's GitHub repository. All automatic pulls are logged into a file.
 
