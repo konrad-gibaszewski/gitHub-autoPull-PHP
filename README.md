@@ -16,8 +16,8 @@ git commit -m 'Added gitHub-autoPull-PHP as a submodule'
 cd repoData
 git fetch -a
 git tag
-git checkout 1.0.0
-git commit -m 'Changed to gitHub-autoPull-PHP 1.0.0'
+git checkout 1.0.1
+git commit -m 'Changed to gitHub-autoPull-PHP 1.0.1'
 ./initConfig.sh
 ```
 
