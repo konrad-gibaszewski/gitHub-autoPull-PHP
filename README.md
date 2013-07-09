@@ -18,7 +18,7 @@ ae2da0d420e790c7394fd4d7a8fb3726edf7135c - 2012-10-05T03:17:59-07:00 - Readme up
 
 ## Install
 
-Set up GitHub WebHook ```http://www.domain.tld/repoData/git-pull.php``` by going to _Project's repository -> Settings -> Service Hooks -> WebHook URLs_.
+Set up GitHub WebHook ```http://www.domain.tld/repoData/git-pull.php``` by going to _[GitHub](https://github.com/) -> Project's repository -> Settings -> Service Hooks -> WebHook URLs_.
 
 ```bash
 cd /var/www/projectName
@@ -44,7 +44,7 @@ cd /var/www/.ssh/
 ssh-keygen -t rsa
 ```
 
-__Important!__ Do not forget to deploy public key by going to *[GitHub](https://github.com/) -> Project's Repository -> Admin -> Deploy keys -> Add deploy key*.
+__Important!__ Do not forget to deploy public key by going to *[GitHub](https://github.com/) -> Project's Repository -> Settings -> Deploy keys -> Add deploy key*.
 
 SSH configuration for user www-data. File __/var/www/.ssh/config__
 
