@@ -1,6 +1,15 @@
 # GitHub web hook auto pull for PHP
 
-__GitHub automatic pull script__ keeps your project's remote installation up-to-date by automatically pulling all changes pushed to that project's GitHub repository. All automatic pulls are logged into a file.
+__GitHub automatic pull script__ (git-pull.php) keeps your project's remote installation up-to-date by automatically pulling all changes pushed to that project's GitHub repository. All automatic pulls are logged into a file.
+
+## Usage
+```bash
+# Automatic by GitHub WebHook
+POST /repoData/git-pull.php
+
+# Manual 
+GET /repoData/git-pull.php
+```
 
 File __/var/www/projectName/repoData/git-auto-pulls.log__
 ```log
@@ -8,6 +17,8 @@ ae2da0d420e790c7394fd4d7a8fb3726edf7135c - 2012-10-05T03:17:59-07:00 - Readme up
 ```
 
 ## Install
+
+Set up GitHub WebHook ```http://www.domain.tld/repoData/git-pull.php``` by going to _Project's repository -> Settings -> Service Hooks -> WebHook URLs_.
 
 ```bash
 cd /var/www/projectName
