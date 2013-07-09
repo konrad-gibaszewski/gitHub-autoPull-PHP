@@ -24,7 +24,7 @@ exec('which git', $gitExec) or die('Git is not available!');
 $gitPath  = substr($gitExec['0'], 0, -3);
 
 // Get repository root directory
-exec('git rev-parse --show-toplevel', $repoRoot);
+exec('cd .. && git rev-parse --show-toplevel', $repoRoot);
 
 // Change dir to repo's root directory
 chdir($repoRoot[0]);
