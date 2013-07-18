@@ -13,7 +13,7 @@
 # Files to be copied from defaults
 #
 # config/config.default.ini
-# log/git-auto-pulls.default.log
+# log/git.default.log
 
 # copyFile sourceFileName destinationFileName
 #
@@ -40,7 +40,7 @@ function showMessage {
 # Init (copy defaults to its target positions)
 showMessage "Config files" "intialising..."
 copyFile config/config.default.ini config/config.ini
-copyFile log/git-auto-pulls.default.log log/git-auto-pulls.log
+copyFile log/git.default.log log/git.log
 showMessage "Config files" "intialising..." "OK"
 
 # Exit msg
