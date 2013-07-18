@@ -1,0 +1,5 @@
+# Git | Ignore files specified below
+
+# Git auto pull
+config/config.ini
+log/git.log
