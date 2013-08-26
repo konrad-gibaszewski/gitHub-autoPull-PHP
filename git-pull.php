@@ -16,7 +16,7 @@
 $config = parse_ini_file('config/config.ini', true);
 
 // File to log auto pulls
-$logFile = $config['logging']['path'] . $config['logging']['file'];
+$logFile = $config['config']['path'] . $config['logging']['path'] . $config['logging']['file'];
 
 function_exists('exec') or die('Function exec is not available!');
 exec('which git', $gitExec) or die('Git is not available!');
