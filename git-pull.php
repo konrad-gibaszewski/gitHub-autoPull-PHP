@@ -34,10 +34,26 @@ if($_REQUEST['payload']) {
 
     // Post receive GitHub web-hook
     try {
+
+        if (get_magic_quotes_gpc()) {
+            $payload = stripslashes($_REQUEST['payload']);
+        } else {
+            $payload = $_REQUEST['payload'];
+        }
+
         // Decode payload JSON
-        $payload = json_decode($_REQUEST['payload']);
+        $payload = json_decode($payload);
+
+        if(is_null($payload)) {
+            throw new Exception('Couldn\'t decode the $_REQUEST[\'payload\']' . "\r\n");
+        }
 
     } catch(Exception $e) {
+        file_put_contents(
+            $logFile,
+            'Error (File: ' . $e->getFile() . ', Line ' . $e->getLine() . '): ' . $e->getMessage(),
+            FILE_APPEND
+        );
         exit(0);
     }
 
