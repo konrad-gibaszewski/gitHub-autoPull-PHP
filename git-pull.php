@@ -49,11 +49,26 @@ if($_REQUEST['payload']) {
         }
 
     } catch(Exception $e) {
+
+        // [Error] [subjectPrefix i.e. Server name] [repoName] [on-Server git pull] <Error msg>
+        $errorHeader = '[Error] ' . $config['logging']['subjectPrefix'] . ' [' . $config['repository']['name'] .
+            '] [on-Server git pull] Automatic pull failed!';
+        $errorStats = '[Error] (File: ' . $e->getFile() . ', Line ' . $e->getLine() . ')';
+
+        // Log to file
         file_put_contents(
             $logFile,
-            'Error (File: ' . $e->getFile() . ', Line ' . $e->getLine() . '): ' . $e->getMessage(),
+            date("d.m.Y H:i:s") . ' - ' . $errorStats . ': ' . $e->getMessage(),
             FILE_APPEND
         );
+        // Log to E-Mail
+        send_email(
+            $config['logging']['fromEmail'],
+            $config['logging']['toEmail'],
+            $errorHeader,
+            $errorStats . ': ' . $e->getMessage()
+        );
+        // Exit
         exit(0);
     }
 
@@ -67,8 +82,8 @@ if($_REQUEST['payload']) {
 
         // Prepare log data
         $timestamp = date_create_from_format('Y-m-d\TH:i:sP', $payload->head_commit->timestamp);
-        $logData = $payload->head_commit->id . '(on ' . $config['repository']['branch'] . ') - ' .
-                   date("d.m.Y H:i:s", date_format($timestamp, 'U')) . ' - ' .
+        $logData = date("d.m.Y H:i:s", date_format($timestamp, 'U')) . ' - ' .
+                   $payload->head_commit->id . '(on ' . $config['repository']['branch'] . ') - ' .
                    $payload->head_commit->message . ' - ' . $payload->head_commit->author->name ."\n";
 
         // Log automatic pulls
@@ -83,4 +98,21 @@ if($_REQUEST['payload']) {
     system($gitPath . 'git pull ' . $config['repository']['host'] . ':' . $config['repository']['owner'] . '/'
             . $config['repository']['name'] . '.git ' . $config['repository']['branch'] . ' 2>&1');
     echo "\n\n" . 'Manual request finished.' . "\n\n";
+}
+
+/**
+ * Send E-Mails from PHP
+ *
+ * @param $from string    From E-Mail Address
+ * @param $to string      To E-Mail Address
+ * @param $subject string E-Mail subject
+ * @param $message string E-Mail content
+ */
+function send_email($from, $to, $subject, $message) {
+
+    $headers = 'From: ' . $from . "\r\n" .
+        'Reply-To: ' . $from . "\r\n" .
+        'X-Mailer: PHP/' . phpversion();
+
+    mail($to, $subject, $message, $headers);
 }
